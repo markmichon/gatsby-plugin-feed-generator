@@ -15,13 +15,13 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
 
   const { allMarkdownRemark: { edges: data } } = feedQuery
   const items = data.map(i => {
-    const { node: { html, frontmatter: { date, path, title } } } = i
+    const { node: { html, frontmatter } } = i
 
     return {
-      id: siteUrl + "" + path,
-      url: siteUrl + "" + path,
-      title: title,
-      date_published: new Date(date).toISOString(),
+      id: path.join(siteUrl, frontmatter.path),
+      url: path.join(siteUrl, frontmatter.path),
+      title: frontmatter.title,
+      date_published: new Date(frontmatter.date).toISOString(),
       content_html: html
     }
   })
@@ -31,10 +31,10 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
     title: title,
     description: description,
     home_page_url: siteUrl,
-    feed_url: "https://markmichon.com/feed.json",
+    feed_url: path.join(siteUrl, "feed.json"),
     user_comment:
       "This feed allows you to read the posts from this site in any feed reader that supports the JSON Feed format. To add this feed to your reader, copy the following URL — https://markmichon.com/feed.json — and add it your reader.",
-    favicon: "https://markmichon.com/icon.png",
+    favicon: path.join(siteUrl, "icon.png"),
     author: {
       name: "Mark Michon"
     },
@@ -44,9 +44,9 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
   const rssFeed = new RSS({
     title: title,
     description: description,
-    feed_url: "https://markmichon.com/feed.rss",
-    site_url: "https://markmichon.com",
-    image_url: "https://markmichon.com/icon.png"
+    feed_url: path.join(siteUrl, "feed.rss"),
+    site_url: siteUrl,
+    image_url: path.join(siteUrl, "icon.png")
   })
 
   items.forEach(i => {
@@ -62,8 +62,16 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
 
   const rss = rssFeed.xml()
 
-  await writeFile("./public/feed.json", JSON.stringify(jsonFeed))
-  await writeFile("./public/feed.xml", rss)
+  await writeFile(
+    "./public/feed.json",
+    JSON.stringify(jsonFeed),
+    "utf8"
+  ).catch(r => {
+    console.log("Failed to write JSON Feed file: ", r)
+  })
+  await writeFile("./public/feed.xml", rss, "utf8").catch(r => {
+    console.log("Failed to write RSS Feed File:", r)
+  })
 
   return Promise.resolve()
 }
