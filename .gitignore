@@ -1,4 +1,3 @@
 node_modules
-gatsby-node.js
-gatsby-ssr.js
-internals.js
+/*.js
+!index.js
