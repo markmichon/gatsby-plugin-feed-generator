@@ -1,0 +1,19 @@
+{
+  "name": "gatsby-plugin-feed-generator",
+  "version": "0.0.0",
+  "description": "Generate RSS and JSON feeds for GatsbyJS",
+  "scripts": {
+    "build": "babel src --out-dir . ",
+    "watch": "babel -w src --out-dir . "
+  },
+  "author": "Mark Michon",
+  "license": "ISC",
+  "dependencies": {
+    "pify": "^3.0.0",
+    "rss": "^1.2.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0"
+  }
+}
