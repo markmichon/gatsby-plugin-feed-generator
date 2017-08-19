@@ -8,7 +8,6 @@ const buildFeed = () => {}
 
 exports.onPostBuild = async ({ graphql }, pluginOptions) => {
   delete pluginOptions.plugins
-
   const options = {
     ...defaultOptions,
     ...pluginOptions
