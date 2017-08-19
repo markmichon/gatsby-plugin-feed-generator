@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-feed-generator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generate RSS and JSON feeds for a Gatsby blog",
   "scripts": {
     "build": "babel src --out-dir . ",
