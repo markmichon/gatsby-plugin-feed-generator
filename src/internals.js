@@ -15,7 +15,8 @@ export const runQuery = (handler, query) =>
 export const defaultOptions = {
   // Generator name
   generator: `GatsbyJS`,
-
+  rss: true,
+  json: true,
   siteQuery: `
     {
       site {
@@ -23,6 +24,7 @@ export const defaultOptions = {
           title
           description
           siteUrl
+          author
         }
       }
     }
@@ -32,7 +34,7 @@ export const defaultOptions = {
       {
         allMarkdownRemark(
           sort: {order: DESC, fields: [frontmatter___date]}, 
-          limit: 1000, 
+          limit: 100, 
           
           ) {
           edges {

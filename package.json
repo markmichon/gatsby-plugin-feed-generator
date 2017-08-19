@@ -1,19 +1,29 @@
 {
   "name": "gatsby-plugin-feed-generator",
-  "version": "0.0.0",
-  "description": "Generate RSS and JSON feeds for GatsbyJS",
+  "version": "1.0.0",
+  "description": "Generate RSS and JSON feeds for a Gatsby blog",
   "scripts": {
     "build": "babel src --out-dir . ",
     "watch": "babel -w src --out-dir . "
   },
-  "author": "Mark Michon",
-  "license": "ISC",
+  "author": "Mark Michon <hello@markmichon.com>",
+  "license": "MIT",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "rss",
+    "atom",
+    "jsonfeed",
+    "feed"
+  ],
   "dependencies": {
     "pify": "^3.0.0",
     "rss": "^1.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.0"
   }
 }
