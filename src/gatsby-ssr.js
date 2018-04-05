@@ -9,13 +9,23 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   let output = []
   if (rss) {
     output.push(
-      <link rel="alternate" type="application/rss+xml" href="feed.xml" />
+      <link
+        rel="alternate"
+        key="gatsby-feed-rss"
+        type="application/rss+xml"
+        href="feed.xml"
+      />
     )
   }
 
   if (json) {
     output.push(
-      <link rel="alternate" type="application/json" href="feed.json" />
+      <link
+        rel="alternate"
+        key="gatsby-feed-json"
+        type="application/json"
+        href="feed.json"
+      />
     )
   }
 
