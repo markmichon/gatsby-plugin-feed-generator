@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-feed-generator",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Generate RSS and JSON feeds for a Gatsby blog",
   "scripts": {
     "build": "babel src --out-dir . ",
@@ -9,14 +9,7 @@
   "author": "Mark Michon <hello@markmichon.com>",
   "license": "MIT",
   "repository": "markmichon/gatsby-plugin-feed-generator",
-  "keywords": [
-    "gatsby",
-    "gatsby-plugin",
-    "rss",
-    "atom",
-    "jsonfeed",
-    "feed"
-  ],
+  "keywords": ["gatsby", "gatsby-plugin", "rss", "atom", "jsonfeed", "feed"],
   "dependencies": {
     "pify": "^3.0.0",
     "rss": "^1.2.2"
