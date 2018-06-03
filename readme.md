@@ -70,3 +70,67 @@ plugins: [
   }
 ]
 ```
+
+### Customization
+Add an option to define a function that runs on the result of the query.
+That function is expected return an object with properties matching the needed data.
+
+* **Site** requires `title, description, author, and siteUrl
+* **Form** requires `title, description, url, guid, author, date_published, date_modified`
+
+```javascript
+// gatsby-config.js
+
+plugins: [
+  {
+    resolve: 'gatsby-plugin-feed-generator',
+    options: {
+      siteOptions: {user_comment: "This feed allows you to..."},
+      siteQuery: `
+        { 
+          cmsSite {
+            title
+            description
+            author
+            siteUrl
+          }
+        }
+      `,
+      siteQueryPost: ({cmsSite},siteOptions = {}) => ({...cmsSite, ...siteOptions})
+      // snip
+      
+// src/gatsby-node.js
+
+const siteQueryPostDefault = ({site: {siteMetadata}) => ({...siteMetadata})
+const siteQueryPost options.siteQueryPost || siteQueryPostDefault
+const siteData = siteQueryPost(siteQuery, options.siteQueryOptions)
+
+// siteData = {title, description, author, siteUrl}
+
+// ditto for feeds
+
+// Also?
+// this could get out of hand quickly, but 
+plugins: [ { resolve: 'gatsby-plugin-feed-generator' options: {
+      feedOptions: {
+        feedUrlFileName:  "feed"
+        // or
+        feedUrlRss: "podcast.rss"
+      },
+
+//
+
+// Maybe?
+plugins: [ { resolve: 'gatsby-plugin-feed-generator' 
+  options: {
+    feeds: [
+      {path: '/'}, // default site & feed queries
+      {path: '/podcast', fileBase: 'podcast', feedQuery: graphql`
+        allPodCast { // filter, sort, limit...
+          title
+          url
+          content
+        }
+       `  
+    ]
+```
