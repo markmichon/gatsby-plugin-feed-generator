@@ -4,8 +4,6 @@ import { defaultOptions, runQuery, writeFile } from "./internals"
 
 const publicPath = "./public"
 
-const buildFeed = () => {}
-
 exports.onPostBuild = async ({ graphql }, pluginOptions) => {
   delete pluginOptions.plugins
   const options = {
