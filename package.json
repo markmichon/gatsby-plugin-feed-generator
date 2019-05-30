@@ -19,8 +19,8 @@
     "feed"
   ],
   "dependencies": {
-    "pify": "^3.0.0",
-    "rss": "^1.2.2"
+    "feed": "^3.0.0",
+    "pify": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

@@ -1,58 +1,41 @@
 import path from 'path'
-import RSS from 'rss'
-const buildJsonFeed = ({ site, items, name = 'feed.json' }) => {
+import { Feed } from 'feed'
+
+const buildFeed = ({ site, items, name, options = {} }) => {
   const { siteUrl, description, title, author } = site.siteMetadata
-  const feedURL = path.join(site.siteMetadata.siteUrl, name)
-  return {
-    version: 'https://jsonfeed.org/version/1',
+  const feed = new Feed({
     title: title,
     description: description,
-    home_page_url: siteUrl,
-    feed_url: feedURL,
-    user_comment: `This feed allows you to read the posts from this site in any feed reader that supports the JSON Feed format. To add this feed to your reader, copy the following URL — ${feedURL} — and add it your reader.`,
-    favicon: path.join(siteUrl, 'icon.png'),
+    copyright: `All rights reserved ${new Date().getFullYear()}, ${author}`,
+    id: siteUrl,
+    link: siteUrl,
+    image: path.join(siteUrl, 'image.png'),
+    favicon: path.join(siteUrl, 'favicon.ico'),
+    generator: 'GatsbyJS',
+    feedLinks: {
+      json: path.join(siteUrl, name, '.json'),
+      rss: path.join(siteUrl, name, '.xml'),
+    },
     author: {
       name: author,
     },
-    items: buildJsonItems(items),
+    ...options,
+  })
+
+  for (let item of items) {
+    const { title, url, date, html, excerpt = '', ...rest } = item
+    const d = typeof date === 'object' ? date : new Date(date)
+    feed.addItem({
+      title,
+      link: url,
+      description: excerpt,
+      content: html,
+      id: url,
+      date: d,
+      ...rest,
+    })
   }
+  return feed
 }
 
-const buildRSSFeed = ({ site, items, name = 'feed.rss' }) => {
-  const { siteUrl, description, title, author } = site.siteMetadata
-  const rss = new RSS({
-    title: title,
-    description: description,
-    feed_url: path.join(siteUrl, 'feed.rss'),
-    site_url: siteUrl,
-    image_url: path.join(siteUrl, 'icon.png'),
-  })
-  const feedItems = buildRSSItems(items, site)
-  feedItems.forEach(i => {
-    rss.item(i)
-  })
-
-  return rss.xml()
-}
-
-const buildJsonItems = items =>
-  items.map(({ title, url, date, html }) => ({
-    url,
-    title,
-    id: url,
-    date_published: new Date(date).toISOString(),
-    date_modified: new Date(date).toISOString(),
-    content_html: html,
-  }))
-
-const buildRSSItems = (items = [], site = {}) =>
-  items.map(({ title, url, date, html }) => ({
-    title,
-    url,
-    guid: url,
-    description: html,
-    author: site.siteMetadata.author,
-    date: new Date(date).toISOString(),
-  }))
-
-export { buildJsonFeed, buildRSSFeed }
+export { buildFeed }
