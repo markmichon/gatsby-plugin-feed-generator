@@ -3,6 +3,7 @@
   "version": "1.0.9",
   "description": "Generate RSS and JSON feeds for a Gatsby blog",
   "scripts": {
+    "prepublish": "yarn run build",
     "build": "babel src --out-dir . ",
     "watch": "babel -w src --out-dir . "
   },
@@ -18,8 +19,8 @@
     "feed"
   ],
   "dependencies": {
-    "pify": "^3.0.0",
-    "rss": "^1.2.2"
+    "feed": "^3.0.0",
+    "pify": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
