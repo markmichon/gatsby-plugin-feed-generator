@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-feed-generator",
-  "version": "2.0.0",
+  "version": "1.0.9",
   "description": "Generate RSS and JSON feeds for a Gatsby blog",
   "scripts": {
     "prepublish": "yarn run build",
