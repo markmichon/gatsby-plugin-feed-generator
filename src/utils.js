@@ -1,5 +1,5 @@
-import path from 'path'
 import { Feed } from 'feed'
+import urlJoin from 'url-join'
 
 const buildFeed = ({ site, items, name, options = {} }) => {
   const { siteUrl, description, title, author } = site.siteMetadata
@@ -9,12 +9,12 @@ const buildFeed = ({ site, items, name, options = {} }) => {
     copyright: `All rights reserved ${new Date().getFullYear()}, ${author}`,
     id: siteUrl,
     link: siteUrl,
-    image: path.join(siteUrl, 'image.png'),
-    favicon: path.join(siteUrl, 'favicon.ico'),
+    // image: urlJoin(siteUrl, 'image.png'),
+    favicon: urlJoin(siteUrl, 'favicon.ico'),
     generator: 'GatsbyJS',
     feedLinks: {
-      json: path.join(siteUrl, name, '.json'),
-      rss: path.join(siteUrl, name, '.xml'),
+      json: urlJoin(siteUrl, name).replace(/\/+$/, '') + '.json',
+      rss: urlJoin(siteUrl, name).replace(/\/+$/, '') + '.xml',
     },
     author: {
       name: author,

@@ -1,7 +1,7 @@
 import path from 'path'
 import { runQuery, writeFile } from './internals'
 import { buildFeed } from './utils'
-const publicPath = './public'
+let publicPath = './public'
 
 exports.onPostBuild = async ({ graphql }, pluginOptions) => {
   delete pluginOptions.plugins
