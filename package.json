@@ -20,7 +20,8 @@
   ],
   "dependencies": {
     "feed": "^3.0.0",
-    "pify": "^3.0.0"
+    "pify": "^3.0.0",
+    "url-join": "^4.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
