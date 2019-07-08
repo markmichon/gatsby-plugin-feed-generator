@@ -20,7 +20,7 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
     const output = buildFeed({
       site,
       items: feedItems,
-      name: `${feed.name}.json`,
+      name: feed.name,
       ...feed.options,
     })
     if (options.json) {
