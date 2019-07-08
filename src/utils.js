@@ -13,8 +13,8 @@ const buildFeed = ({ site, items, name, options = {} }) => {
     favicon: urlJoin(siteUrl, 'favicon.ico'),
     generator: 'GatsbyJS',
     feedLinks: {
-      json: urlJoin(siteUrl, name).replace(/\/+$/, '') + '.json',
-      rss: urlJoin(siteUrl, name).replace(/\/+$/, '') + '.xml',
+      json: urlJoin(siteUrl, name).replace(/\/+$/, ''),
+      rss: urlJoin(siteUrl, name).replace(/\/+$/, ''),
     },
     author: {
       name: author,
