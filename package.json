@@ -3,7 +3,6 @@
   "version": "2.0.3",
   "description": "Generate RSS and JSON feeds for a Gatsby blog",
   "scripts": {
-    "prepublish": "yarn run build",
     "build": "babel src --out-dir . ",
     "watch": "babel -w src --out-dir . "
   },
