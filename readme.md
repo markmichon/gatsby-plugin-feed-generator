@@ -53,8 +53,8 @@ plugins: [
     resolve: 'gatsby-plugin-feed-generator',
     options: {
     generator: `GatsbyJS`,
-    rss: true, // Set to false to stop rss generation
-    json: true, // Set to false to stop json feed generation
+    rss: true, // Set to true to enable rss generation
+    json: true, // Set to true to enable json feed generation
     siteQuery: `
       {
         site {
